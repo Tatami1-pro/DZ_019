@@ -1,0 +1,24 @@
+CREATE DATABASE IF NOT EXISTS mobile_operator;
+USE mobile_operator;
+CREATE TABLE IF NOT EXISTS tariffs (
+    tariff_id INT AUTO_INCREMENT PRIMARY KEY,
+    tariff_code VARCHAR(50) NOT NULL UNIQUE,
+    tariff_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS service_types (
+    service_type_id INT AUTO_INCREMENT PRIMARY KEY,
+    service_type_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS services (
+    service_id INT AUTO_INCREMENT PRIMARY KEY,
+    service_code VARCHAR(50) NOT NULL UNIQUE,
+    tariff_id INT NOT NULL,
+    service_type_id INT NOT NULL,
+    param_value DECIMAL(10, 2) NOT NULL,
+    param_unit VARCHAR(20) NOT NULL,
+    CONSTRAINT fk_tariff 
+        FOREIGN KEY (tariff_id) REFERENCES tariffs(tariff_id) ON DELETE CASCADE,
+    CONSTRAINT fk_service_type 
+        FOREIGN KEY (service_type_id) REFERENCES service_types(service_type_id) ON DELETE CASCADE,
+    CONSTRAINT unique_tariff_servicetype UNIQUE (tariff_id, service_type_id)
+);

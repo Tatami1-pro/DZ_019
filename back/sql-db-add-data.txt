@@ -1,0 +1,24 @@
+-- Тарифы
+INSERT INTO tariffs (tariff_code, tariff_name) VALUES
+('BASE', 'Базовый тариф'),
+('PREM', 'Премиум тариф'),
+('BEZlimit', 'Безлимит');
+
+-- Типы услуг
+INSERT INTO service_types (service_type_name) VALUES
+('Мобильный интернет'),
+('Звонки внутри сети'),
+('Звонки на другие сети'),
+('SMS пакеты'),
+('Мессенджеры'),
+('Раздача интернета'),
+('Международные звонки');
+
+-- Услуги (привязка к тарифам)
+-- Пример: «Мобильный интернет: 30 ГБ» (код 'SRV-DATA30')
+INSERT INTO services (service_code, tariff_id, service_type_id, param_value, param_unit) VALUES
+('GO99', 1, 1, 30, 'ГБ'),
+('DN50', 1, 2, 100, 'мин.'),
+('DL34', 2, 1, 100, 'ГБ'),
+('AF33', 2, 4, 50, 'SMS'),
+('QN36', 3, 1, 9999, 'ГБ');
